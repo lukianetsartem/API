@@ -1,0 +1,27 @@
+{
+  "name": "shop-api",
+  "version": "1.0.0",
+  "description": "Shop RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukianetsartem/API.git"
+  },
+  "keywords": [
+    "shop",
+    "restful",
+    "api"
+  ],
+  "author": "Artem Lukianets",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukianetsartem/API/issues"
+  },
+  "homepage": "https://github.com/lukianetsartem/API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
