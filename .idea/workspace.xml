@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="052ec78e-3932-4217-85d6-b79993e4447b" name="Default Changelist" comment="" />
+    <list default="true" id="052ec78e-3932-4217-85d6-b79993e4447b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/api/routes/orders.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/express/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +41,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Artem Lukianets\Desktop\API\api" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -47,7 +59,7 @@
       <workItem from="1591261826405" duration="14590000" />
       <workItem from="1591356123565" duration="705000" />
       <workItem from="1591777920350" duration="1441000" />
-      <workItem from="1591864133314" duration="2113000" />
+      <workItem from="1591864133314" duration="8473000" />
     </task>
     <servers />
   </component>

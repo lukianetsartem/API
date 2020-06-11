@@ -21,7 +21,8 @@
     "url": "https://github.com/lukianetsartem/API/issues"
   },
   "homepage": "https://github.com/lukianetsartem/API#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "express": "^4.17.1"
   }
 }
