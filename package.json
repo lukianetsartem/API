@@ -4,7 +4,8 @@
   "description": "Shop RESTful API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,8 @@
     "url": "https://github.com/lukianetsartem/API/issues"
   },
   "homepage": "https://github.com/lukianetsartem/API#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "express": "^4.17.1"
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   }
 }
