@@ -8,10 +8,15 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'post products'
-    })
-})
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    };
+    res.status(201).json({
+        message: 'Handling POST requests to /products',
+        createdProduct: product
+    });
+});
 
 router.patch('/:productId', (req, res, next) => {
     res.status(200).json({
