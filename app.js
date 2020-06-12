@@ -13,6 +13,7 @@ mongoose.connect(`mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?r
         useUnifiedTopology: true
     }
 )
+mongoose.Promise = global.Promise
 
 app.use(morgan("dev"))
 app.use(bodyParser.urlencoded({ extended: false }))

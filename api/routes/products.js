@@ -11,22 +11,24 @@ router.get('/', (req, res, next) => {
         .then(result => {
             const response = {
                 count: result.length,
+                resultCode: 0,
                 products: result.map(result => {
                     return {
                         name: result.name,
                         price: result.price,
                         _id: result._id,
-                        request: {
-                            type: 'GET',
-                            url: `http://localhost:3000/products/${result._id}`
-                        }
                     }
-                })
+                }),
+                request: {
+                    type: 'GET',
+                    url: `http://localhost:3000/products/`
+                }
             }
             res.status(200).json(response)
         })
         .catch(err => {
             res.status(500).json({
+                resultCode: 1,
                 error: err
             })
         })
@@ -45,6 +47,7 @@ router.post('/', (req, res, next) => {
                     name: result.name,
                     price: result.price,
                     _id: result._id,
+                    resultCode: 0,
                     request: {
                         type: 'GET',
                         url: `http://localhost:3000/products/${result._id}`
@@ -54,6 +57,7 @@ router.post('/', (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
+                resultCode: 1,
                 error: err
             })
         })
@@ -67,6 +71,7 @@ router.get('/:productId', (req, res, next) => {
         .then(result => {
             result ? res.status(200).json({
                     product: result,
+                    resultCode: 0,
                     request: {
                         type: 'GET',
                         url: `http://localost:3000/products/${result._id}`
@@ -78,6 +83,7 @@ router.get('/:productId', (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
+                resultCode: 1,
                 error: err
             })
         })
@@ -97,6 +103,7 @@ router.patch('/:productId', (req, res, next) => {
             res.status(200).json({
                 product: result,
                 message: 'Product has been updated',
+                resultCode: 0,
                 request: {
                     type: 'PATCH',
                     url: `http://localost:3000/products/${result._id}`
@@ -104,6 +111,7 @@ router.patch('/:productId', (req, res, next) => {
             })
         }).catch(err => {
         res.status(500).json({
+            resultCode: 1,
             error: err
         })
     })
@@ -116,6 +124,7 @@ router.delete('/:productId', (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 message: 'Product has been deleted',
+                resultCode: 0,
                 request: {
                     type: 'DELETE',
                     url: `http://localost:3000/products/${result._id}`
@@ -124,6 +133,7 @@ router.delete('/:productId', (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
+                resultCode: 1,
                 error: err
             })
         })
