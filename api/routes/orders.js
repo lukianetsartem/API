@@ -6,6 +6,8 @@ const Order = require('../models/order')
 
 router.get('/', (req, res, next) => {
     Order.find()
+        .select("product quantity _id")
+        .populate('product')
         .exec()
         .then(result => {
             res.status(200).json({

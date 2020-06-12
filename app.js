@@ -7,7 +7,8 @@ const mongoose = require('mongoose')
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/orders')
 
-mongoose.connect(`mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
+mongoose.connect(
+    `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -16,6 +17,7 @@ mongoose.connect(`mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?r
 mongoose.Promise = global.Promise
 
 app.use(morgan("dev"))
+app.use(express('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
