@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const multer = require('multer')
 
+/*
+const multer = require('multer')
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, './uploads/')
@@ -29,26 +30,18 @@ const upload = multer(
         },
         fileFilter: fileFilter
     }
-)
+)*/
 
 const Product = require('../models/product')
 
 router.get('/', (req, res, next) => {
     Product.find()
-        .select('name price _id productImage')
         .exec()
         .then(result => {
             const response = {
                 count: result.length,
                 resultCode: 0,
-                products: result.map(result => {
-                    return {
-                        name: result.name,
-                        price: result.price,
-                        _id: result._id,
-                        productImage: result.productImage,
-                    }
-                }),
+                products: result.map(result => result),
                 request: {
                     type: 'GET',
                     url: `http://localhost:3000/products/`
@@ -64,20 +57,45 @@ router.get('/', (req, res, next) => {
         })
 })
 
-router.post('/', upload.single('productImage'), (req, res, next) => {
+router.post('/',(req, res, next) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
+        productType: req.body.productType,
         name: req.body.name,
         price: req.body.price,
-        productImage: req.file.path
+        salePrice: req.body.salePrice,
+        description: req.body.description,
+        inStock: req.body.inStock,
+        productParams: {
+            height: req.body.height,
+            width: req.body.width,
+            depth: req.body.depth,
+            weight: req.body.weight,
+            size: req.body.size,
+        },
+        details: {
+            assembly: req.body.assembly,
+            fabricComposition: req.body.fabricComposition,
+            foamType: req.body.foamType,
+            care: req.body.care,
+        },
+        productPhotos: {
+            modelPhoto: req.body.modelPhoto,
+            interiorPhoto: req.body.interiorPhoto,
+            sizePhoto: req.body.sizePhoto,
+            additionalPhotos: req.body.additionalPhotos,
+            houseProudPhotos: req.body.houseProudPhotos,
+        },
+        productStory: {
+            storyHeader: req.body.storyHeader,
+            storyText: req.body.storyText,
+        }
     })
     product.save()
         .then(result => {
             res.status(201).json({
                 createdProduct: {
-                    name: result.name,
-                    price: result.price,
-                    _id: result._id,
+                    product: result,
                     resultCode: 0,
                     request: {
                         type: 'GET',
@@ -87,6 +105,7 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
             })
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({
                 resultCode: 1,
                 error: err
@@ -97,7 +116,6 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId
     Product.findById(id)
-        .select('name price _id productImage')
         .exec()
         .then(result => {
             result ? res.status(200).json({
@@ -135,6 +153,7 @@ router.patch('/:productId', (req, res, next) => {
                 product: result,
                 message: 'Product has been updated',
                 resultCode: 0,
+                value: updateOps,
                 request: {
                     type: 'PATCH',
                     url: `http://localost:3000/products/${result._id}`
