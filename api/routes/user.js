@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const checkAuth = require('../middleware/checkAuth')
 
 const User = require('../models/user')
 
@@ -24,8 +25,11 @@ router.post('/signup', (req, res, next) => {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             login: req.body.login,
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
                             email: req.body.email,
                             password: hash,
+                            promotions: req.body.promotions,
                         })
                         user.save()
                             .then(result => {
@@ -69,11 +73,12 @@ router.post('/login', (req, res, next) => {
                         },
                         'SnyGacB9cq3qT3zqO1Ee3mOaUEK349rRCbC',
                         {
-                            expiresIn: "1h"
+                            expiresIn: req.body.rememberMe ? "7 days" : "1h"
                         }
                     )
                     return res.status(200).json({
                         message: 'Auth successful',
+                        resultCode: 0,
                         token: token
                     })
                 }
@@ -81,16 +86,18 @@ router.post('/login', (req, res, next) => {
         })
 })
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', checkAuth, (req, res, next) => {
     User.remove({_id: req.params.userId})
         .exec()
         .then(result => {
             res.status(200).json({
+                resultCode: 0,
                 message: 'User has been deleted'
             })
         })
         .catch(err => {
             res.status(500).json({
+                resultCode: 1,
                 error: err
             })
         })
