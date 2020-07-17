@@ -1,12 +1,13 @@
 const express = require('express')
-const app = express()
 const morgan = require('morgan')
+
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
+const app = express()
+
 const productRoutes = require('./api/routes/products')
-const orderRoutes = require('./api/routes/orders')
-const userRoutes = require('./api/routes/user')
+const authRoutes = require('./api/routes/auth')
 
 mongoose.connect(
     `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
@@ -36,8 +37,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/products", productRoutes)
-app.use("/orders", orderRoutes)
-app.use("/user", userRoutes)
+app.use("/auth", authRoutes)
 
 app.use((req, res, next) => {
     const error = new Error("Not found")
