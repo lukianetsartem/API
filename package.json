@@ -1,7 +1,7 @@
 {
-  "name": "shop-api",
+  "name": "store-api",
   "version": "1.0.0",
-  "description": "Shop RESTful API",
+  "description": "Store REST API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,24 +9,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukianetsartem/API.git"
+    "url": "git+https://github.com/lukianetsartem/storeAPI.git"
   },
   "keywords": [
-    "shop",
+    "store",
     "restful",
     "api"
   ],
   "author": "Artem Lukianets",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lukianetsartem/API/issues"
+    "url": "https://github.com/lukianetsartem/storeAPI/issues"
   },
-  "homepage": "https://github.com/lukianetsartem/API#readme",
+  "homepage": "https://github.com/lukianetsartem/storeAPI#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.3.3",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
     "multer": "^1.4.2"

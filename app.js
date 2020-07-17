@@ -1,10 +1,16 @@
 const express = require('express')
 const morgan = require('morgan')
-
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 const app = express()
+
+const store = new MongoDBStore({
+    uri: `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
+    collection: 'sessions'
+})
 
 const productRoutes = require('./api/routes/products')
 const authRoutes = require('./api/routes/auth')
@@ -20,8 +26,18 @@ mongoose.Promise = global.Promise
 
 app.use(morgan("dev"))
 app.use(express('uploads'))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use(
+    session(
+        {
+            secret: 'secret',
+            resave: false,
+            saveUninitialized: false,
+            store: store
+        }
+    )
+)
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
