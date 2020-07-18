@@ -11,6 +11,8 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     promotions: { type: Boolean, required: true },
     admin: { type: Boolean, required: true },
+    resetToken: { type: String, required: false },
+    resetTokenExpiration: { type: Date, required: false },
     cart: {
         items: [
             {

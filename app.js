@@ -7,16 +7,17 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 
 const app = express()
 
+const MONGODB_URL = `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`
 const store = new MongoDBStore({
-    uri: `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
+    uri: MONGODB_URL,
     collection: 'sessions'
 })
 
-const productRoutes = require('./api/routes/products')
+const shopRoutes = require('./api/routes/shop')
 const authRoutes = require('./api/routes/auth')
 
 mongoose.connect(
-    `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`,
+    MONGODB_URL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -52,7 +53,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use("/products", productRoutes)
+app.use("/shop", shopRoutes)
 app.use("/auth", authRoutes)
 
 app.use((req, res, next) => {
