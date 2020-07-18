@@ -171,3 +171,17 @@ exports.resetUserData = (req, res, next) => {
                 })
         })
 }
+
+exports.getUserData = (req, res, next) => {
+    if(req.session.isLoggedIn) {
+        return res.status(200).json({
+            user: req.session.user[0],
+            resultCode: 0
+        })
+    } else {
+        return res.status(401).json({
+            message: "Auth failed",
+            resultCode: 1
+        })
+    }
+}
