@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Product = require('../models/product')
+const User = require('../models/user')
 
 exports.getProducts = (req, res, next) => {
     Product.find()
@@ -133,4 +134,115 @@ exports.deleteProduct = (req, res, next) => {
                 error: err
             })
         })
+}
+
+exports.addToCart = (req, res, next) => {
+    const user = req.session.user[0]._id
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                let counter = 0
+                let cart = user.cart.items
+                const newProduct = {productId: req.params.productId, quantity: 1}
+                cart.find(product => {
+                    product.productId == newProduct.productId
+                        ? product.quantity++ && counter++ : undefined
+                })
+                counter === 0 && cart.push(newProduct)
+                user.save()
+                    .then(() => {
+                        res.status(200).json({
+                            cart: user.cart.items,
+                            resultCode: 0,
+                        })
+                    })
+            })
+    } else {
+        res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
+}
+
+exports.removeFromCart = (req, res, next) => {
+    const user = req.session.user[0]._id
+    const productId = req.params.productId
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                let cart = user.cart.items
+                user.cart.items = cart.filter(product => product.productId != productId)
+                user.save()
+                    .then(newUser => {
+                        res.status(200).json({
+                            newUser: newUser,
+                            resultCode: 0,
+                        })
+                    })
+            })
+    } else {
+        return res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
+}
+
+exports.addToWishList = (req, res, next) => {
+    const user = req.session.user[0]._id
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                let counter = 0
+                let wishList = user.wishList.items
+                const newProduct = {productId: req.params.productId}
+                wishList.find(product => {
+                    product.productId == newProduct.productId
+                        ? counter += 1
+                        : undefined
+                })
+                counter === 0 && wishList.push(newProduct)
+                user.save()
+                    .then(() => {
+                        res.status(200).json({
+                            wishList: user.wishList.items,
+                            resultCode: 0,
+                        })
+                    })
+            })
+    } else {
+        res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
+}
+
+exports.removeFromWishList = (req, res, next) => {
+    const user = req.session.user[0]._id
+    const productId = req.params.productId
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                let wishList = user.wishList.items
+                user.wishList.items = wishList.filter(product => product.productId != productId)
+                user.save()
+                    .then(() => {
+                        res.status(200).json({
+                            wishList: user.wishList.items,
+                            resultCode: 0,
+                        })
+                    })
+            })
+    } else {
+        return res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
 }

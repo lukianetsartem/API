@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
                             lastName: req.body.lastName,
                             password: hashedPassword,
                             promotions: req.body.promotions,
-                            admin: false,
+                            admin: true,
                             cart: {items: []}
                         })
                         return user.save()
@@ -58,8 +58,7 @@ exports.signin = (req, res, next) => {
                     message: 'User doesn\'t exist'
                 })
             }
-            bcrypt
-                .compare(password, user[0].password)
+            bcrypt.compare(password, user[0].password)
                 .then(doMatch => {
                     if (doMatch) {
                         req.session.isLoggedIn = true;
@@ -69,7 +68,7 @@ exports.signin = (req, res, next) => {
                             message: 'Auth successful',
                             resultCode: 0,
                         })
-                    } else {
+                    } else if (!doMatch) {
                         return res.status(401).json({
                             message: 'Incorrect password',
                             resultCode: 1,
@@ -150,12 +149,12 @@ exports.resetUserData = (req, res, next) => {
                         user.email = email
                         user.save()
                             .then(result => {
-                            return res.status(200).json({
-                                result: result,
-                                message: 'Change user data success',
-                                resultCode: 0,
+                                return res.status(200).json({
+                                    result: result,
+                                    message: 'Change user data success',
+                                    resultCode: 0,
+                                })
                             })
-                        })
                     } else {
                         return res.status(401).json({
                             message: 'Incorrect password',
@@ -173,7 +172,8 @@ exports.resetUserData = (req, res, next) => {
 }
 
 exports.getUserData = (req, res, next) => {
-    if(req.session.isLoggedIn) {
+    console.log(req.session)
+    if (req.session.isLoggedIn) {
         return res.status(200).json({
             user: req.session.user[0],
             resultCode: 0
