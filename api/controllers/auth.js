@@ -25,8 +25,24 @@ exports.signup = (req, res, next) => {
                             lastName: req.body.lastName,
                             password: hashedPassword,
                             promotions: req.body.promotions,
-                            admin: true,
-                            cart: {items: []}
+                            admin: false,
+                            address: {
+                                firstName: null,
+                                lastName: null,
+                                address: null,
+                                town: null,
+                                country: null,
+                                postcode: null,
+                                telephone: null,
+                            },
+                            card: {
+                                number: null,
+                                name: null,
+                                expiryDate: null,
+                                cvv: null,
+                            },
+                            cart: {items: []},
+                            wishList: {items: []},
                         })
                         return user.save()
                     })
@@ -172,7 +188,6 @@ exports.resetUserData = (req, res, next) => {
 }
 
 exports.getUserData = (req, res, next) => {
-    console.log(req.session)
     if (req.session.isLoggedIn) {
         return res.status(200).json({
             user: req.session.user[0],

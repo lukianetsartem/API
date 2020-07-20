@@ -5,12 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/controllers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/controllers/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/shop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="13.11.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../storeApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -93,7 +90,8 @@
       <workItem from="1595054537998" duration="15363000" />
       <workItem from="1595100634779" duration="636000" />
       <workItem from="1595139958152" duration="6914000" />
-      <workItem from="1595164831294" duration="4893000" />
+      <workItem from="1595164831294" duration="7285000" />
+      <workItem from="1595238137514" duration="3669000" />
     </task>
     <servers />
   </component>

@@ -17,11 +17,15 @@ router.delete('/products/:productId', productController.deleteProduct)
 
 // Cart routes
 
+router.get('/cart', productController.getCart)
+
 router.post('/cart/:productId', productController.addToCart)
 
 router.delete('/cart/:productId', productController.removeFromCart)
 
 // Wish list routes
+
+router.get('/wishlist', productController.getWishList)
 
 router.post('/wishlist/:productId', productController.addToWishList)
 

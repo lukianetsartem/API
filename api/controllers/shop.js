@@ -136,6 +136,26 @@ exports.deleteProduct = (req, res, next) => {
         })
 }
 
+exports.getCart = (req, res, next) => {
+    const user = req.session.user[0]._id
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                const cart = user.cart.items
+                res.status(200).json({
+                    cart: cart,
+                    resultCode: 0,
+                })
+            })
+    } else {
+        res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
+}
+
 exports.addToCart = (req, res, next) => {
     const user = req.session.user[0]._id
 
@@ -185,6 +205,26 @@ exports.removeFromCart = (req, res, next) => {
             })
     } else {
         return res.status(401).json({
+            message: 'Auth failed',
+            resultCode: 1,
+        })
+    }
+}
+
+exports.getWishList = (req, res, next) => {
+    const user = req.session.user[0]._id
+
+    if (req.session.isLoggedIn) {
+        User.findOne({_id: user})
+            .then(user => {
+                const wishList = user.wishList.items
+                res.status(200).json({
+                    wishList: wishList,
+                    resultCode: 0,
+                })
+            })
+    } else {
+        res.status(401).json({
             message: 'Auth failed',
             resultCode: 1,
         })
