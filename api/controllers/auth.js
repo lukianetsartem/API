@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
 
@@ -77,11 +78,14 @@ exports.signin = (req, res, next) => {
             bcrypt.compare(password, user[0].password)
                 .then(doMatch => {
                     if (doMatch) {
-                        req.session.isLoggedIn = true;
-                        req.session.user = user;
-                        req.session.save()
+                        const token = jwt.sign({
+                            id: user[0]._id,
+                        }, 'secret', {
+                            expiresIn: "60 days"
+                        })
                         return res.status(200).json({
                             message: 'Auth successful',
+                            token: token,
                             resultCode: 0,
                         })
                     } else if (!doMatch) {
@@ -100,22 +104,14 @@ exports.signin = (req, res, next) => {
         })
 }
 
-exports.logout = (req, res, next) => {
-    req.session.destroy(err => {
-        err ? console.log(err)
-            : res.status(200).json({
-                message: 'Logout successful',
-                resultCode: 0,
-            })
-    })
-}
+exports.editPassword = (req, res, next) => {
+    const password = req.body.data.currentPassword
+    const newPassword = req.body.data.newPassword
 
-exports.resetPassword = (req, res, next) => {
-    const password = req.body.password
-    const newPassword = req.body.newPassword
-    const userId = req.body.userId
+    const token = req.body.token
+    const id = jwt.verify(token, 'secret').id
 
-    User.findOne({_id: userId})
+    User.findOne({_id: id})
         .then(user => {
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
@@ -143,19 +139,26 @@ exports.resetPassword = (req, res, next) => {
                     return res.status(500).json({
                         error: err,
                         resultCode: 1,
+                        id: id
                     })
                 })
         })
 }
 
-exports.resetUserData = (req, res, next) => {
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    const password = req.body.password
-    const email = req.body.email
-    const userId = req.body.userId
+/*
 
-    User.findOne({_id: userId})
+ */
+
+exports.resetUserData = (req, res, next) => {
+    const firstName = req.body.details.firstName
+    const lastName = req.body.details.lastName
+    const password = req.body.details.password
+    const email = req.body.details.email
+
+    const token = req.body.token
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
         .then(user => {
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
@@ -164,9 +167,13 @@ exports.resetUserData = (req, res, next) => {
                         user.lastName = lastName
                         user.email = email
                         user.save()
-                            .then(result => {
+                            .then(() => {
                                 return res.status(200).json({
-                                    result: result,
+                                    details: {
+                                        firstName: user.firstName,
+                                        lastName: user.lastName,
+                                        email: user.email,
+                                    },
                                     message: 'Change user data success',
                                     resultCode: 0,
                                 })
@@ -187,16 +194,79 @@ exports.resetUserData = (req, res, next) => {
         })
 }
 
-exports.getUserData = (req, res, next) => {
-    if (req.session.isLoggedIn) {
-        return res.status(200).json({
-            user: req.session.user[0],
-            resultCode: 0
+exports.getDetails = (req, res, next) => {
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
+        .then(user => {
+            return res.status(200).json({
+                details: {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                },
+                resultCode: 0
+            })
         })
-    } else {
-        return res.status(401).json({
-            message: "Auth failed",
-            resultCode: 1
+        .catch(err => {
+            return res.status(500).json({
+                error: err,
+                resultCode: 1,
+            })
         })
-    }
+}
+
+
+exports.setAddress = (req, res, next) => {
+    const address = req.body.data
+    console.log(address)
+    const token = req.body.token
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
+        .then(user => {
+            user.address.firstName = address.firstName
+            user.address.lastName = address.lastName
+            user.address.address = address.address
+            user.address.town = address.town
+            user.address.country = address.country
+            user.address.postcode = address.postcode
+            user.address.telephone = address.telephone
+            user.save()
+                .then(newUser => {
+                    console.log(newUser.address)
+                    return res.status(200).json({
+                        message: 'Address saved',
+                        address: user.address,
+                        resultCode: 0
+                    })
+                })
+                .catch(err => {
+                    return res.status(500).json({
+                        error: err,
+                        resultCode: 1,
+                    })
+                })
+        })
+}
+
+exports.getAddress = (req, res, next) => {
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
+
+    console.log(id)
+    User.findOne({_id: id})
+        .then(user => {
+            return res.status(200).json({
+                address: user.address,
+                resultCode: 0
+            })
+        })
+        .catch(err => {
+            return res.status(500).json({
+                error: err,
+                resultCode: 1,
+            })
+        })
 }

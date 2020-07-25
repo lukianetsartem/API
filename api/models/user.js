@@ -24,7 +24,6 @@ const userSchema = mongoose.Schema({
         number: { type: String, required: false },
         name: { type: String, required: false },
         expiryDate: { type: String, required: false },
-        cvv: { type: String, required: false },
     },
     cart: {
         items: [

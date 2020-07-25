@@ -2,17 +2,10 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const session = require('express-session')
-const MongoDBStore = require('connect-mongodb-session')(session)
-const cors = require('cors')
 
 const app = express()
 
 const MONGODB_URL = `mongodb+srv://admin:J4aI2d@storedb-onq18.mongodb.net/storeDB?retryWrites=true&w=majority`
-const store = new MongoDBStore({
-    uri: MONGODB_URL,
-    collection: 'sessions'
-})
 
 const shopRoutes = require('./api/routes/shop')
 const authRoutes = require('./api/routes/auth')
@@ -26,30 +19,19 @@ mongoose.connect(
 )
 mongoose.Promise = global.Promise
 
-app.use(cors())
 app.use(morgan("dev"))
 app.use(express('uploads'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(
-    session(
-        {
-            secret: 'secret',
-            resave: false,
-            saveUninitialized: false,
-            store: store
-        }
-    )
-)
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
     res.header(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie"
     )
     if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET, Set-Cookie')
         return res.status(200).json({})
     }
     next()

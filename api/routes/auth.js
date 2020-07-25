@@ -7,12 +7,14 @@ router.post('/signup', authController.signup)
 
 router.post('/signin', authController.signin)
 
-router.post('/logout', authController.logout)
-
-router.post('/reset-password', authController.resetPassword)
+router.post('/reset-password', authController.editPassword)
 
 router.post('/data', authController.resetUserData)
 
-router.get('/data', authController.getUserData)
+router.get('/data/:token', authController.getDetails)
+
+router.post('/address', authController.setAddress)
+
+router.get('/address/:token', authController.getAddress)
 
 module.exports = router
