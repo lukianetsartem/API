@@ -6,9 +6,6 @@
       <change beforePath="$PROJECT_DIR$/api/controllers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +42,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="13.11.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../storeApp" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -106,6 +103,8 @@
       <workItem from="1595417432457" duration="8771000" />
       <workItem from="1595597891014" duration="239000" />
       <workItem from="1595598186162" duration="3434000" />
+      <workItem from="1595669793200" duration="7136000" />
+      <workItem from="1595680937195" duration="8192000" />
     </task>
     <servers />
   </component>
@@ -117,10 +116,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1594972659218" />
-    <state x="954" y="170" key="FileChooserDialogImpl" timestamp="1595073021482">
+    <state x="954" y="170" key="FileChooserDialogImpl" timestamp="1595681264451">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="954" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1595073021482" />
+    <state x="954" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1595681264451" />
     <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1595067391148">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -149,9 +148,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1595413269310" />
-    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595070701249">
+    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595677137938">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595070701249" />
+    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595677137938" />
   </component>
 </project>

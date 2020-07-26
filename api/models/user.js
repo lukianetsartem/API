@@ -11,6 +11,16 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     promotions: { type: Boolean, required: true },
     admin: { type: Boolean, required: true },
+    style: {
+        firstCategory: {
+            name: { type: String, required: false },
+            percent: { type: Number, required: false },
+        },
+        secondCategory: {
+            name: { type: String, required: false },
+            percent: { type: Number, required: false },
+        }
+    },
     address: {
         firstName: { type: String, required: false },
         lastName: { type: String, required: false },
