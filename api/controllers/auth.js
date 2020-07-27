@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
                             lastName: req.body.lastName,
                             password: hashedPassword,
                             promotions: req.body.promotions,
-                            admin: true,
+                            admin: false,
                             cart: {items: []},
                             wishList: {items: []},
                             address: {

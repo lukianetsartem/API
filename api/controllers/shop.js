@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 const Product = require('../models/product')
 const User = require('../models/user')
 
@@ -211,78 +212,96 @@ exports.removeFromCart = (req, res, next) => {
     }
 }
 
-exports.getWishList = (req, res, next) => {
-    const user = req.session.user[0]._id
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                const wishList = user.wishList.items
-                res.status(200).json({
-                    wishList: wishList,
-                    resultCode: 0,
+exports.getWishList = (req, res, next) => {
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
+        .then(user => {
+            const idList = user.wishList.items.map(item => item.productId)
+            Promise.all(idList
+                .map(id => Product.findById(id).then(
+                    product => {
+                        return {
+                            modelPhoto: product.productPhotos.modelPhoto,
+                            description: product.description,
+                            oldPrice: product.oldPrice,
+                            price: product.price,
+                        }
+                    }
+                )))
+                .then(wishList => {
+                    res.status(200).json({
+                        wishList: wishList,
+                        resultCode: 0,
+                    })
                 })
-            })
-    } else {
-        res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                resultCode: 1,
+                error: err
+            })
+        })
 }
 
-exports.addToWishList = (req, res, next) => {
-    const user = req.session.user[0]._id
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                let counter = 0
-                let wishList = user.wishList.items
-                const newProduct = {productId: req.params.productId}
-                wishList.find(product => {
-                    product.productId == newProduct.productId
-                        ? counter += 1
-                        : undefined
-                })
-                counter === 0 && wishList.push(newProduct)
-                user.save()
-                    .then(() => {
-                        res.status(200).json({
-                            wishList: user.wishList.items,
-                            resultCode: 0,
-                        })
-                    })
+exports.addToWishList = (req, res, next) => {
+    const product = req.body.data
+    const token = req.body.token
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
+        .then(user => {
+            let counter = 0
+            let wishList = user.wishList.items
+            const newProduct = {productId: product}
+            wishList.find(product => {
+                product.productId.toString() === newProduct.productId
+                    ? counter += 1
+                    : undefined
             })
-    } else {
-        res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
+            counter === 0 && wishList.push(newProduct)
+            user.save()
+                .then(() => {
+                    res.status(200).json({
+                        wishList: user.wishList.items,
+                        resultCode: 0,
+                    })
+                })
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                resultCode: 1,
+                error: err
+            })
+        })
 }
 
 exports.removeFromWishList = (req, res, next) => {
-    const user = req.session.user[0]._id
-    const productId = req.params.productId
+    const products = req.body.data
+    const token = req.body.token
+    const id = jwt.verify(token, 'secret').id
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                let wishList = user.wishList.items
-                user.wishList.items = wishList.filter(product => product.productId != productId)
-                user.save()
-                    .then(() => {
-                        res.status(200).json({
-                            wishList: user.wishList.items,
-                            resultCode: 0,
-                        })
-                    })
+    User.findOne({_id: id})
+        .then(user => {
+            let wishList = user.wishList.items
+            let newWishList = []
+            products.map(productData => {
+                wishList = wishList.filter(product => product.productId.toString() !== productData)
             })
-    } else {
-        return res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
+            user.wishList.items = newWishList
+            user.save()
+            res.status(200).json({
+                wishList: user.wishList.items,
+                resultCode: 0,
+            })
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                resultCode: 1,
+                error: err
+            })
+        })
 }

@@ -25,10 +25,10 @@ router.delete('/cart/:productId', productController.removeFromCart)
 
 // Wish list routes
 
-router.get('/wishlist', productController.getWishList)
+router.get('/wishlist/:token', productController.getWishList)
 
-router.post('/wishlist/:productId', productController.addToWishList)
+router.post('/wishlist', productController.addToWishList)
 
-router.delete('/wishlist/:productId', productController.removeFromWishList)
+router.delete('/wishlist', productController.removeFromWishList)
 
 module.exports = router
