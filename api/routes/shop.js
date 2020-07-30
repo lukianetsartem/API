@@ -27,8 +27,8 @@ router.delete('/cart/:productId', productController.removeFromCart)
 
 router.get('/wishlist/:token', productController.getWishList)
 
-router.post('/wishlist', productController.addToWishList)
+router.post('/wishlist/add', productController.addToWishList)
 
-router.delete('/wishlist', productController.removeFromWishList)
+router.post('/wishlist/edit', productController.editWishList)
 
 module.exports = router

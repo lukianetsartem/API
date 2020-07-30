@@ -224,10 +224,12 @@ exports.getWishList = (req, res, next) => {
                 .map(id => Product.findById(id).then(
                     product => {
                         return {
-                            modelPhoto: product.productPhotos.modelPhoto,
+                            modelPhoto: product.productPhotos.interiorPhoto,
                             description: product.description,
+                            productType: product.productType,
                             oldPrice: product.oldPrice,
                             price: product.price,
+                            id: product._id,
                         }
                     }
                 )))
@@ -279,19 +281,23 @@ exports.addToWishList = (req, res, next) => {
         })
 }
 
-exports.removeFromWishList = (req, res, next) => {
-    const products = req.body.data
+exports.editWishList = (req, res) => {
+    const receivedData = req.body.data
     const token = req.body.token
     const id = jwt.verify(token, 'secret').id
 
     User.findOne({_id: id})
         .then(user => {
-            let wishList = user.wishList.items
-            let newWishList = []
-            products.map(productData => {
-                wishList = wishList.filter(product => product.productId.toString() !== productData)
-            })
-            user.wishList.items = newWishList
+            const wishList = user.wishList.items
+                .map(item => item.productId.toString())
+            const newWishList = user.wishList.items
+                .map(item => item.productId.toString())
+                .concat(receivedData)
+                .filter(item => receivedData.indexOf(item) < 0 || wishList.indexOf(item) < 0)
+            const result = user.wishList.items
+                .filter(item => newWishList.indexOf(item.productId) >= 0)
+
+            user.wishList.items = result
             user.save()
             res.status(200).json({
                 wishList: user.wishList.items,
