@@ -374,7 +374,7 @@ exports.setStyle = (req, res) => {
     }
 }
 
-exports.getStyle = (req, res, next) => {
+exports.getStyle = (req, res) => {
     const token = req.params.token
     const id = jwt.verify(token, 'secret').id
 

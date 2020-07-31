@@ -11,8 +11,6 @@ router.get('/products/:name', productController.getProductByName)
 
 router.post('/products', productController.createProduct)
 
-router.patch('/products/:productId', productController.updateProduct)
-
 router.delete('/products/:productId', productController.deleteProduct)
 
 // Cart routes

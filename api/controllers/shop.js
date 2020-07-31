@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const Product = require('../models/product')
 const User = require('../models/user')
 
-exports.getProducts = (req, res, next) => {
+exports.getProducts = (req, res) => {
     Product.find()
         .exec()
         .then(result => {
@@ -41,7 +41,7 @@ exports.getProducts = (req, res, next) => {
         })
 }
 
-exports.createProduct = (req, res, next) => {
+exports.createProduct = (req, res) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         productType: req.body.productType,
@@ -129,7 +129,7 @@ exports.getProductByName = (req, res) => {
         })
 }
 
-exports.deleteProduct = (req, res, next) => {
+exports.deleteProduct = (req, res) => {
     const id = req.params.productId
     Product.remove({_id: id})
         .exec()
@@ -147,7 +147,7 @@ exports.deleteProduct = (req, res, next) => {
         })
 }
 
-exports.getCart = (req, res, next) => {
+exports.getCart = (req, res) => {
     const user = req.session.user[0]._id
 
     if (req.session.isLoggedIn) {
@@ -167,7 +167,7 @@ exports.getCart = (req, res, next) => {
     }
 }
 
-exports.addToCart = (req, res, next) => {
+exports.addToCart = (req, res) => {
     const user = req.session.user[0]._id
 
     if (req.session.isLoggedIn) {
@@ -197,7 +197,7 @@ exports.addToCart = (req, res, next) => {
     }
 }
 
-exports.removeFromCart = (req, res, next) => {
+exports.removeFromCart = (req, res) => {
     const user = req.session.user[0]._id
     const productId = req.params.productId
 
@@ -223,7 +223,7 @@ exports.removeFromCart = (req, res, next) => {
 }
 
 
-exports.getWishList = (req, res, next) => {
+exports.getWishList = (req, res) => {
     const token = req.params.token
     const id = jwt.verify(token, 'secret').id
 
@@ -265,7 +265,7 @@ exports.getWishList = (req, res, next) => {
 }
 
 
-exports.addToWishList = (req, res, next) => {
+exports.addToWishList = (req, res) => {
     const product = req.body.data
     const token = req.body.token
     const id = jwt.verify(token, 'secret').id
