@@ -7,7 +7,7 @@ const productController = require('../controllers/shop')
 
 router.get('/products', productController.getProducts)
 
-router.get('/products/:productId', productController.getProductById)
+router.get('/products/:name', productController.getProductByName)
 
 router.post('/products', productController.createProduct)
 

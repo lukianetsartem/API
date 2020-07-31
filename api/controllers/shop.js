@@ -10,7 +10,27 @@ exports.getProducts = (req, res, next) => {
             res.status(200).json({
                 count: result.length,
                 resultCode: 0,
-                products: result.map(result => result)
+                products: result.map(result => {
+                    return {
+                        productParams: result.productParams,
+                        details: result.details,
+                        productPhotos: result.productPhotos,
+                        productStory: result.productStory,
+                        _id: result._id,
+                        productType: result.productType,
+                        name: result.name,
+                        price: result.price,
+                        oldPrice: result.oldPrice,
+                        description: result.description,
+                        inStock: result.inStock,
+                        productLink: result.description
+                            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                            .replace(/\s{2,}/g, " ")
+                            .split(' ')
+                            .join('-')
+                            .toLowerCase()
+                    }
+                })
             })
         })
         .catch(err => {
@@ -73,18 +93,33 @@ exports.createProduct = (req, res, next) => {
         })
 }
 
-exports.getProductById = (req, res, next) => {
-    const id = req.params.productId
-    Product.findById(id)
-        .exec()
+exports.getProductByName = (req, res) => {
+    const name = req.params.name
+    let result = {}
+    Product.find()
         .then(result => {
-            result ? res.status(200).json({
-                    product: result,
+            let product = {}
+            result.forEach(item => {
+                const productLink = item.description.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                    .replace(/\s{2,}/g, " ")
+                    .split(' ')
+                    .join('-')
+                    .toLowerCase()
+                if(productLink === name) {
+                    product = item
+                }
+            })
+            if(product._id) {
+                res.status(200).json({
+                    product: product,
                     resultCode: 0,
                 })
-                : res.status(404).json({
-                    message: 'No valid entry found for provided ID'
+            } else {
+                res.status(404).json({
+                    message: 'Product doesn\'t found',
+                    resultCode: 1,
                 })
+            }
         })
         .catch(err => {
             res.status(500).json({
@@ -226,6 +261,12 @@ exports.getWishList = (req, res, next) => {
                         return {
                             modelPhoto: product.productPhotos.interiorPhoto,
                             description: product.description,
+                            productLink: product.description
+                                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                                .replace(/\s{2,}/g, " ")
+                                .split(' ')
+                                .join('-')
+                                .toLowerCase(),
                             productType: product.productType,
                             oldPrice: product.oldPrice,
                             price: product.price,
