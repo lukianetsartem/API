@@ -129,31 +129,6 @@ exports.getProductByName = (req, res) => {
         })
 }
 
-exports.updateProduct = (req, res, next) => {
-    const id = req.params.productId
-    const updateOps = {} // Object with new product properties
-    for (const ops of req.body) { // Iterate through array of product properties
-        updateOps[ops.propertyName] = ops.value // propertyName - name of product property, that you want to edit, value - him value
-    }
-    Product.update(
-        {_id: id},
-        {$set: updateOps})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                product: result,
-                message: 'Product has been updated',
-                resultCode: 0,
-                value: updateOps,
-            })
-        }).catch(err => {
-        res.status(500).json({
-            resultCode: 1,
-            error: err
-        })
-    })
-}
-
 exports.deleteProduct = (req, res, next) => {
     const id = req.params.productId
     Product.remove({_id: id})
