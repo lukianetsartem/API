@@ -9,7 +9,6 @@ exports.getProducts = (req, res) => {
         .then(result => {
             res.status(200).json({
                 count: result.length,
-                resultCode: 0,
                 products: result.map(result => {
                     return {
                         productParams: result.productParams,
@@ -35,7 +34,6 @@ exports.getProducts = (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -79,15 +77,13 @@ exports.createProduct = (req, res) => {
         .then(result => {
             res.status(201).json({
                 createdProduct: {
-                    product: result,
-                    resultCode: 0,
+                    product: result
                 }
             })
         })
         .catch(err => {
             console.log(err)
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -95,7 +91,6 @@ exports.createProduct = (req, res) => {
 
 exports.getProductByName = (req, res) => {
     const name = req.params.name
-    let result = {}
     Product.find()
         .then(result => {
             let product = {}
@@ -111,19 +106,16 @@ exports.getProductByName = (req, res) => {
             })
             if(product._id) {
                 res.status(200).json({
-                    product: product,
-                    resultCode: 0,
+                    product: product
                 })
             } else {
                 res.status(404).json({
-                    message: 'Product doesn\'t found',
-                    resultCode: 1,
+                    message: 'Product doesn\'t found'
                 })
             }
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -133,15 +125,13 @@ exports.deleteProduct = (req, res) => {
     const id = req.params.productId
     Product.remove({_id: id})
         .exec()
-        .then(result => {
+        .then(() => {
             res.status(200).json({
-                message: 'Product has been deleted',
-                resultCode: 0,
+                message: 'Product has been deleted'
             })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -161,8 +151,7 @@ exports.getCart = (req, res) => {
             })
     } else {
         res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
+            message: 'Auth failed'
         })
     }
 }
@@ -177,22 +166,20 @@ exports.addToCart = (req, res) => {
                 let cart = user.cart.items
                 const newProduct = {productId: req.params.productId, quantity: 1}
                 cart.find(product => {
-                    product.productId == newProduct.productId
+                    product.productId.toString() === newProduct.productId
                         ? product.quantity++ && counter++ : undefined
                 })
                 counter === 0 && cart.push(newProduct)
                 user.save()
                     .then(() => {
                         res.status(200).json({
-                            cart: user.cart.items,
-                            resultCode: 0,
+                            cart: user.cart.items
                         })
                     })
             })
     } else {
         res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
+            message: 'Auth failed'
         })
     }
 }
@@ -205,19 +192,17 @@ exports.removeFromCart = (req, res) => {
         User.findOne({_id: user})
             .then(user => {
                 let cart = user.cart.items
-                user.cart.items = cart.filter(product => product.productId != productId)
+                user.cart.items = cart.filter(product => product.productId.toString() !== productId)
                 user.save()
                     .then(newUser => {
                         res.status(200).json({
-                            newUser: newUser,
-                            resultCode: 0,
+                            newUser: newUser
                         })
                     })
             })
     } else {
         return res.status(401).json({
-            message: 'Auth failed',
-            resultCode: 1,
+            message: 'Auth failed'
         })
     }
 }
@@ -251,14 +236,12 @@ exports.getWishList = (req, res) => {
                 )))
                 .then(wishList => {
                     res.status(200).json({
-                        wishList: wishList,
-                        resultCode: 0,
+                        wishList: wishList
                     })
                 })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -284,14 +267,12 @@ exports.addToWishList = (req, res) => {
             user.save()
                 .then(() => {
                     res.status(200).json({
-                        wishList: user.wishList.items,
-                        resultCode: 0,
+                        wishList: user.wishList.items
                     })
                 })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -316,13 +297,11 @@ exports.editWishList = (req, res) => {
             user.wishList.items = result
             user.save()
             res.status(200).json({
-                wishList: user.wishList.items,
-                resultCode: 0,
+                wishList: user.wishList.items
             })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })

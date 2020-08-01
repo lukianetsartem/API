@@ -60,13 +60,11 @@ exports.signup = (req, res) => {
                     .then(result => {
                         res.status(201).json({
                             message: 'User created',
-                            user: result,
-                            resultCode: 0
+                            user: result
                         })
                     })
                     .catch(err => {
                         res.status(500).json({
-                            resultCode: 1,
                             error: err
                         })
                     })
@@ -95,20 +93,17 @@ exports.signin = (req, res) => {
                         })
                         return res.status(200).json({
                             message: 'Auth successful',
-                            token: token,
-                            resultCode: 0,
+                            token: token
                         })
                     } else if (!doMatch) {
                         return res.status(401).json({
-                            message: 'Incorrect password',
-                            resultCode: 1,
+                            message: 'Incorrect password'
                         })
                     }
                 })
                 .catch(err => {
                     return res.status(500).json({
-                        error: err,
-                        resultCode: 1,
+                        error: err
                     })
                 })
         })
@@ -134,21 +129,18 @@ exports.editPassword = (req, res) => {
                             .then(result => {
                                 return res.status(200).json({
                                     user: result,
-                                    message: 'Password reset success',
-                                    resultCode: 0,
+                                    message: 'Password reset success'
                                 })
                             })
                     } else {
                         return res.status(401).json({
-                            message: 'Incorrect password',
-                            resultCode: 1,
+                            message: 'Incorrect password'
                         })
                     }
                 })
                 .catch(err => {
                     return res.status(500).json({
                         error: err,
-                        resultCode: 1,
                         id: id
                     })
                 })
@@ -184,21 +176,18 @@ exports.editUserData = (req, res) => {
                                         lastName: user.lastName,
                                         email: user.email,
                                     },
-                                    message: 'Change user data success',
-                                    resultCode: 0,
+                                    message: 'Change user data success'
                                 })
                             })
                     } else {
                         return res.status(401).json({
-                            message: 'Incorrect password',
-                            resultCode: 1,
+                            message: 'Incorrect password'
                         })
                     }
                 })
                 .catch(err => {
                     return res.status(500).json({
-                        error: err,
-                        resultCode: 1,
+                        error: err
                     })
                 })
         })
@@ -215,14 +204,12 @@ exports.getUserData = (req, res) => {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                },
-                resultCode: 0
+                }
             })
         })
         .catch(err => {
             return res.status(500).json({
                 error: err,
-                resultCode: 1,
             })
         })
 }
@@ -248,13 +235,11 @@ exports.setAddress = (req, res) => {
                     return res.status(200).json({
                         message: 'Address saved',
                         address: user.address,
-                        resultCode: 0
                     })
                 })
                 .catch(err => {
                     return res.status(500).json({
                         error: err,
-                        resultCode: 1,
                     })
                 })
         })
@@ -268,13 +253,11 @@ exports.getAddress = (req, res) => {
         .then(user => {
             return res.status(200).json({
                 address: user.address,
-                resultCode: 0
             })
         })
         .catch(err => {
             return res.status(500).json({
                 error: err,
-                resultCode: 1,
             })
         })
 }
@@ -357,19 +340,16 @@ exports.setStyle = (req, res) => {
                     message: 'Style analysis succeed',
                     style: user.style,
                     resultPhotos: resultPhotos,
-                    resultCode: 0,
                 })
             })
             .catch(err => {
                 res.status(500).json({
-                    resultCode: 1,
                     error: err
                 })
             })
     } else {
         return res.status(400).json({
             message: 'Not enough data, to analyse client style',
-            resultCode: 1,
         })
     }
 }
@@ -393,12 +373,10 @@ exports.getStyle = (req, res) => {
                 style: user.style,
                 analysePhotos: photos,
                 resultPhotos: resultPhotos,
-                resultCode: 0,
             })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
@@ -500,12 +478,10 @@ exports.deleteStyle = (req, res) => {
             res.status(200).json({
                 message: 'Style zeroed',
                 style: user.style,
-                resultCode: 0,
             })
         })
         .catch(err => {
             res.status(500).json({
-                resultCode: 1,
                 error: err
             })
         })
