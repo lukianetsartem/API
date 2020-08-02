@@ -21,7 +21,7 @@ router.post('/cart/add', productController.addToCart)
 
 router.post('/cart/quantity', productController.changeQuantity)
 
-router.delete('/cart/remove', productController.removeFromCart)
+router.post('/cart/remove', productController.removeFromCart)
 
 // Wish list routes
 

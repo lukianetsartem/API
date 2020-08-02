@@ -163,6 +163,7 @@ exports.getCart = (req, res) => {
                                 productType: product.productType,
                                 oldPrice: product.oldPrice,
                                 price: product.price,
+                                inStock: product.inStock,
                                 quantity: quantity,
                                 id: product._id,
                             }
@@ -215,17 +216,17 @@ exports.addToCart = (req, res) => {
 
 exports.removeFromCart = (req, res) => {
     const token = req.body.token
-    const id = jwt.verify(token, 'secret').id
     const productId = req.body.data
+    const id = jwt.verify(token, 'secret').id
 
     User.findOne({_id: id})
         .then(user => {
             let cart = user.cart.items
             user.cart.items = cart.filter(product => product.productId.toString() !== productId)
             user.save()
-                .then(newUser => {
+                .then(() => {
                     res.status(200).json({
-                        newUser: newUser
+                        cart: user.cart.items
                     })
                 })
         })
@@ -238,20 +239,18 @@ exports.removeFromCart = (req, res) => {
 
 exports.changeQuantity = (req, res) => {
     const token = req.body.token
-    const productId = req.body.data
-    const reduce = req.body.reduce
+    const productId = req.body.data.productId
+    const quantity = req.body.data.quantity
     const id = jwt.verify(token, 'secret').id
 
     User.findOne({_id: id})
         .then(user => {
             let cartItem = user.cart.items.filter(product => product.productId.toString() === productId)[0]
-            reduce ?
-                cartItem.quantity = cartItem.quantity - 1
-                : cartItem.quantity = cartItem.quantity + 1
+            cartItem.quantity = quantity
 
             user.save()
             res.status(200).json({
-                cartItem: user.cart.items
+                cart: user.cart.items
             })
         })
 }
