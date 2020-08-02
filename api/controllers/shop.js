@@ -236,6 +236,26 @@ exports.removeFromCart = (req, res) => {
         })
 }
 
+exports.changeQuantity = (req, res) => {
+    const token = req.body.token
+    const productId = req.body.data
+    const reduce = req.body.reduce
+    const id = jwt.verify(token, 'secret').id
+
+    User.findOne({_id: id})
+        .then(user => {
+            let cartItem = user.cart.items.filter(product => product.productId.toString() === productId)[0]
+            reduce ?
+                cartItem.quantity = cartItem.quantity - 1
+                : cartItem.quantity = cartItem.quantity + 1
+
+            user.save()
+            res.status(200).json({
+                cartItem: user.cart.items
+            })
+        })
+}
+
 
 exports.getWishList = (req, res) => {
     const token = req.params.token

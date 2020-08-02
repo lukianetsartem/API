@@ -19,6 +19,8 @@ router.get('/cart/:token', productController.getCart)
 
 router.post('/cart/add', productController.addToCart)
 
+router.post('/cart/quantity', productController.changeQuantity)
+
 router.delete('/cart/remove', productController.removeFromCart)
 
 // Wish list routes
