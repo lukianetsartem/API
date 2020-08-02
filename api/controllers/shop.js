@@ -100,11 +100,11 @@ exports.getProductByName = (req, res) => {
                     .split(' ')
                     .join('-')
                     .toLowerCase()
-                if(productLink === name) {
+                if (productLink === name) {
                     product = item
                 }
             })
-            if(product._id) {
+            if (product._id) {
                 res.status(200).json({
                     product: product
                 })
@@ -138,73 +138,72 @@ exports.deleteProduct = (req, res) => {
 }
 
 exports.getCart = (req, res) => {
-    const user = req.session.user[0]._id
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                const cart = user.cart.items
-                res.status(200).json({
-                    cart: cart,
-                    resultCode: 0,
-                })
+    User.findOne({_id: id})
+        .then(user => {
+            const cart = user.cart.items
+            res.status(200).json({
+                cart: cart,
+                resultCode: 0,
             })
-    } else {
-        res.status(401).json({
-            message: 'Auth failed'
+        }).catch(err => {
+        res.status(500).json({
+            error: err
         })
-    }
+    })
 }
 
 exports.addToCart = (req, res) => {
-    const user = req.session.user[0]._id
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                let counter = 0
-                let cart = user.cart.items
-                const newProduct = {productId: req.params.productId, quantity: 1}
-                cart.find(product => {
-                    product.productId.toString() === newProduct.productId
-                        ? product.quantity++ && counter++ : undefined
-                })
-                counter === 0 && cart.push(newProduct)
-                user.save()
-                    .then(() => {
-                        res.status(200).json({
-                            cart: user.cart.items
-                        })
-                    })
+    User.findOne({_id: id})
+        .then(user => {
+            let counter = 0
+            let cart = user.cart.items
+            const newProduct = {productId: req.params.productId, quantity: 1}
+            cart.find(product => {
+                product.productId.toString() === newProduct.productId
+                    ? product.quantity++ && counter++ : undefined
             })
-    } else {
-        res.status(401).json({
-            message: 'Auth failed'
+            counter === 0 && cart.push(newProduct)
+            user.save()
+                .then(() => {
+                    res.status(200).json({
+                        cart: user.cart.items
+                    })
+                })
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
 }
 
 exports.removeFromCart = (req, res) => {
-    const user = req.session.user[0]._id
+    const token = req.params.token
+    const id = jwt.verify(token, 'secret').id
     const productId = req.params.productId
 
-    if (req.session.isLoggedIn) {
-        User.findOne({_id: user})
-            .then(user => {
-                let cart = user.cart.items
-                user.cart.items = cart.filter(product => product.productId.toString() !== productId)
-                user.save()
-                    .then(newUser => {
-                        res.status(200).json({
-                            newUser: newUser
-                        })
+    User.findOne({_id: id})
+        .then(user => {
+            let cart = user.cart.items
+            user.cart.items = cart.filter(product => product.productId.toString() !== productId)
+            user.save()
+                .then(newUser => {
+                    res.status(200).json({
+                        newUser: newUser
                     })
-            })
-    } else {
-        return res.status(401).json({
-            message: 'Auth failed'
+                })
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })  
 }
 
 

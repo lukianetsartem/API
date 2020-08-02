@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="052ec78e-3932-4217-85d6-b79993e4447b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/controllers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/controllers/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/shop.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +41,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="13.11.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="13.11.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../storeApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -112,7 +111,8 @@
       <workItem from="1596089211079" duration="2380000" />
       <workItem from="1596096734426" duration="8963000" />
       <workItem from="1596186686608" duration="8840000" />
-      <workItem from="1596224289176" duration="10661000" />
+      <workItem from="1596224289176" duration="10802000" />
+      <workItem from="1596342772002" duration="213000" />
     </task>
     <servers />
   </component>
