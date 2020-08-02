@@ -143,10 +143,36 @@ exports.getCart = (req, res) => {
 
     User.findOne({_id: id})
         .then(user => {
-            const cart = user.cart.items
-            res.status(200).json({
-                cart: cart,
-                resultCode: 0,
+            const idList = user.cart.items.map(item => item.productId)
+            Promise.all(idList
+                .map(id => {
+                    return Product.findById(id).then(
+                        product => {
+                            const quantity = user.cart.items
+                                .filter(item => item.productId.toString() === product._id.toString())[0].quantity
+
+                            return {
+                                modelPhoto: product.productPhotos.modelPhoto,
+                                description: product.description,
+                                productLink: product.description
+                                    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                                    .replace(/\s{2,}/g, " ")
+                                    .split(' ')
+                                    .join('-')
+                                    .toLowerCase(),
+                                productType: product.productType,
+                                oldPrice: product.oldPrice,
+                                price: product.price,
+                                quantity: quantity,
+                                id: product._id,
+                            }
+                        }
+                    )
+                })).then(cart => {
+                res.status(200).json({
+                    cart: cart,
+                    resultCode: 0,
+                })
             })
         }).catch(err => {
         res.status(500).json({
@@ -156,14 +182,18 @@ exports.getCart = (req, res) => {
 }
 
 exports.addToCart = (req, res) => {
-    const token = req.params.token
+    const token = req.body.token
     const id = jwt.verify(token, 'secret').id
 
     User.findOne({_id: id})
         .then(user => {
             let counter = 0
             let cart = user.cart.items
-            const newProduct = {productId: req.params.productId, quantity: 1}
+            const newProduct = {
+                productId: req.body.data,
+                quantity: 1
+            }
+
             cart.find(product => {
                 product.productId.toString() === newProduct.productId
                     ? product.quantity++ && counter++ : undefined
@@ -184,9 +214,9 @@ exports.addToCart = (req, res) => {
 }
 
 exports.removeFromCart = (req, res) => {
-    const token = req.params.token
+    const token = req.body.token
     const id = jwt.verify(token, 'secret').id
-    const productId = req.params.productId
+    const productId = req.body.data
 
     User.findOne({_id: id})
         .then(user => {
@@ -203,7 +233,7 @@ exports.removeFromCart = (req, res) => {
             res.status(500).json({
                 error: err
             })
-        })  
+        })
 }
 
 

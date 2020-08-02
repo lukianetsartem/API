@@ -15,11 +15,11 @@ router.delete('/products/:productId', productController.deleteProduct)
 
 // Cart routes
 
-router.get('/cart', productController.getCart)
+router.get('/cart/:token', productController.getCart)
 
-router.post('/cart/:productId', productController.addToCart)
+router.post('/cart/add', productController.addToCart)
 
-router.delete('/cart/:productId', productController.removeFromCart)
+router.delete('/cart/remove', productController.removeFromCart)
 
 // Wish list routes
 
