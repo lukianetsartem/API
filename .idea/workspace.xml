@@ -3,8 +3,66 @@
   <component name="ChangeListManager">
     <list default="true" id="052ec78e-3932-4217-85d6-b79993e4447b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/controllers/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/shop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/.jshintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/.jshintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/bl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/bl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/test/indexOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/test/indexOf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bl/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/bl/test/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/HISTORY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/History.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/lib/browser/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/depd/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/safe-buffer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/safe-buffer/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/safe-buffer/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/safe-buffer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/node_modules/safe-buffer/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/session/cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/session/memory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/session/session.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/express-session/session/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ini/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ini/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ini/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ini/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ini/ini.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ini/ini.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ini/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ini/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/docs/migrating.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/auth_header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/extract_jwt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/helpers/assign.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/strategy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/lib/verify_jwt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/auth_header-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/extrators-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/mock_request.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/strategy-init-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/strategy-requests-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/strategy-validation-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/strategy-verify-test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-jwt/test/testdata.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/lib/strategy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/passport-strategy/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +172,12 @@
       <workItem from="1596186686608" duration="8840000" />
       <workItem from="1596224289176" duration="10802000" />
       <workItem from="1596342772002" duration="10576000" />
+      <workItem from="1611344536962" duration="1956000" />
+      <workItem from="1611831870952" duration="89000" />
+      <workItem from="1612551666372" duration="313000" />
+      <workItem from="1612905460420" duration="144000" />
+      <workItem from="1623070335776" duration="11000" />
+      <workItem from="1623070459837" duration="1199000" />
     </task>
     <servers />
   </component>
@@ -121,49 +185,9 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1596089064691">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1623070344287">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1596089064691" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594972659218">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1594972659218" />
-    <state x="954" y="170" key="FileChooserDialogImpl" timestamp="1596224298097">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="954" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596224298097" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1595067391148">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595067391148" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1595067391148">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595067391148" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1595067391148">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595067391148" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1595067391148">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595067391148" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1595598313748">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1595598313748" />
-    <state x="957" y="148" width="579" height="534" key="find.popup" timestamp="1595722115328">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="957" y="148" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1595722115328" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1595856552250">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1595856552250" />
-    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595677137938">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="882" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595677137938" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1623070344287" />
   </component>
 </project>
