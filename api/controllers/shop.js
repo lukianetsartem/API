@@ -22,6 +22,7 @@ exports.getProducts = (req, res) => {
                         oldPrice: result.oldPrice,
                         description: result.description,
                         inStock: result.inStock,
+                        color: result.color,
                         productLink: result.description
                             .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
                             .replace(/\s{2,}/g, " ")
@@ -48,6 +49,7 @@ exports.createProduct = (req, res) => {
         salePrice: req.body.salePrice,
         description: req.body.description,
         inStock: req.body.inStock,
+        color: req.body.color,
         productParams: {
             height: req.body.height,
             width: req.body.width,
